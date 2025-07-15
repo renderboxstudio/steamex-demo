@@ -2,10 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { Button } from "@/app/components/ui/button";
-import { Input } from "@/app/components/ui/input";
 import { SendHorizonal, Home, User, Loader2 } from "lucide-react";
-import BookingForm from "./app/components/BookingForm";
+import ConsultationBooking from "./app/components/ConsultationBooking";
 
 interface Message {
   role: "user" | "assistant";
@@ -251,21 +249,21 @@ const QuoteChat: React.FC = () => {
           <div className="p-6 bg-white border-t border-primary-200">
             <div className="flex items-end gap-4">
               <div className="flex-1">
-                <Input
+                <input
                   ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Describe your roofing project for an instant quote..."
-                  className="input-field text-lg py-4 px-6 min-h-[60px] resize-none"
+                  className="w-full px-6 py-4 text-lg min-h-[60px] bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                   disabled={isLoading}
                 />
               </div>
-              <Button
+              <button
                 onClick={handleSend}
                 disabled={isLoading || input.trim() === ""}
-                className="btn-primary px-8 py-4 min-h-[60px] text-lg font-semibold"
+                className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-4 min-h-[60px] text-lg rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm"
               >
                 {isLoading &&
                 messages[messages.length - 1]?.role === "user" ? (
@@ -273,7 +271,7 @@ const QuoteChat: React.FC = () => {
                 ) : (
                   <SendHorizonal className="w-6 h-6" />
                 )}
-              </Button>
+              </button>
             </div>
             <p className="text-sm text-primary-500 mt-3 text-center">
               Press Enter to send • AI-powered instant quotes
@@ -284,10 +282,13 @@ const QuoteChat: React.FC = () => {
         {/* Booking Form */}
         {showBookingForm && roofingQuote !== null && (
           <div className="xl:w-1/3 xl:min-w-[450px] transition-all duration-500 animate-in slide-in-from-right">
-            <BookingForm
-              quote={roofingQuote}
-              onBookingSuccess={handleBookingSuccess}
-              chatHistory={messages}
+            <ConsultationBooking
+              isOpen={true}
+              onClose={() => setShowBookingForm(false)}
+              customerContext={{
+                quote: roofingQuote
+              }}
+              standalone={true}
             />
           </div>
         )}

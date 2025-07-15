@@ -89,7 +89,7 @@ export default function HomePage() {
             </h1>
           </div>
           <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto">
-            Get instant, accurate roofing estimates powered by advanced AI technology
+            Plug and play instant, accurate roofing estimate, and booking agent.
           </p>
         </div>
 
