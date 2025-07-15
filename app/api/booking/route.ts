@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const bookingData: BookingData = await request.json()
 
     // Validate required fields
-    const requiredFields = ['fullName', 'email', 'phone', 'projectDate', 'location', 'projectType', 'quote']
+    const requiredFields: (keyof BookingData)[] = ['fullName', 'email', 'phone', 'projectDate', 'location', 'projectType', 'quote']
     const missingFields = requiredFields.filter(field => !bookingData[field])
 
     if (missingFields.length > 0) {
