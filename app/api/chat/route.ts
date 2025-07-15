@@ -194,10 +194,10 @@ export async function POST(request: NextRequest) {
     const extractedContext = extractData(history, context || {});
     const systemPrompt = buildSystemPrompt(extractedContext);
 
-    const messages = [
+    const messages: { role: 'user' | 'assistant' | 'system'; content: string }[] = [
       { role: 'system', content: systemPrompt },
       ...history.map((msg: Message) => ({
-        role: msg.role,
+        role: msg.role as 'user' | 'assistant',
         content: msg.content,
       })),
     ];
