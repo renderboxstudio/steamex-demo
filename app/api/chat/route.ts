@@ -121,9 +121,11 @@ function buildSystemPrompt(context: ConversationContext) {
     quote = `[QUOTE: ${Math.round((min + max) / 2)}]`;
   } else {
     const rule = pricingTable[roofType as keyof typeof pricingTable];
-    const cost = Math.round(rule.rate * sqft + rule.deliveryFee);
-    estimateText = `Roof type: ${roofType}, Size: ${sqft} sqft, Rate: $${rule.rate}/sqft, Delivery: $${rule.deliveryFee}, Estimated Total: $${cost}`;
-    quote = `[QUOTE: ${cost}]`;
+    if ('rate' in rule) {
+      const cost = Math.round(rule.rate * sqft + rule.deliveryFee);
+      estimateText = `Roof type: ${roofType}, Size: ${sqft} sqft, Rate: $${rule.rate}/sqft, Delivery: $${rule.deliveryFee}, Estimated Total: $${cost}`;
+      quote = `[QUOTE: ${cost}]`;
+    }
   }
 
   // Upselling opportunities
