@@ -151,14 +151,14 @@ const QuoteChat: React.FC = () => {
       <div
         className={`flex ${
           showBookingForm
-            ? "flex-col xl:flex-row gap-8"
+            ? "flex-col gap-8"
             : "justify-center"
         } transition-all duration-300`}
       >
         {/* Chat Window */}
         <div
           className={`flex flex-col ${
-            showBookingForm ? 'xl:w-2/3' : 'max-w-4xl mx-auto'
+            showBookingForm ? 'w-full' : 'max-w-4xl mx-auto'
           } card overflow-hidden transition-all duration-300`}
           style={{ height: '80vh', minHeight: '600px' }}
         >
@@ -281,7 +281,7 @@ const QuoteChat: React.FC = () => {
 
         {/* Booking Form */}
         {showBookingForm && roofingQuote !== null && (
-          <div className="xl:w-1/3 xl:min-w-[450px] transition-all duration-500 animate-in slide-in-from-right">
+          <div className="w-full transition-all duration-500 animate-in slide-in-from-top">
             <ConsultationBooking
               isOpen={true}
               onClose={() => setShowBookingForm(false)}

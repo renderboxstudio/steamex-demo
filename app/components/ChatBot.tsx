@@ -188,11 +188,9 @@ export default function ChatBot({
   }
 
   return (
-    <div className={`flex gap-4 transition-all duration-500 ${className}`}>
+    <div className={`flex flex-col gap-4 transition-all duration-500 ${className}`}>
       {/* Chatbot */}
-      <div className={`flex flex-col bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-500 ${
-        showBooking ? 'w-1/2' : 'w-full'
-      }`}>
+      <div className={`flex flex-col bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden transition-all duration-500 w-full`}>
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 border-b border-blue-700">
         <div className="flex items-center justify-between">
@@ -337,7 +335,7 @@ export default function ChatBot({
 
       {/* Booking Form */}
       {showBooking && (
-        <div className="w-1/2 animate-in slide-in-from-right duration-500">
+        <div className="w-full animate-in slide-in-from-top duration-500">
           <ConsultationBooking
             isOpen={true}
             onClose={() => setShowBooking(false)}
