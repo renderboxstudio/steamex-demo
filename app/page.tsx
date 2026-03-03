@@ -13,8 +13,9 @@ interface Message {
 interface ConversationContext {
   location?: string;
   serviceArea?: boolean;
-  roofType?: string;
-  sqft?: number;
+  serviceType?: string;
+  complexity?: 'basic' | 'standard' | 'complex';
+  urgency?: 'emergency' | 'urgent' | 'standard';
   timeline?: string;
   budget?: string;
   previousQuotes?: number[];
@@ -68,28 +69,22 @@ export default function HomePage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
                 />
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M8 1v4"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M16 1v4"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
-              AI Roofing Assistant
+              AI Carpet Cleaning Assistant
             </h1>
           </div>
           <p className="text-xl text-gray-600 font-medium max-w-2xl mx-auto">
-            Plug and play instant, accurate roofing estimate, and booking agent.
+            Instant, accurate carpet cleaning quotes and booking — powered by AI.
           </p>
         </div>
 
@@ -97,12 +92,13 @@ export default function HomePage() {
         <ChatBot
           className="h-[70vh] min-h-[600px]"
           onSendMessage={handleSendMessage}
-          initialMessage={`👋 Hello! I'm your AI roofing specialist. I can provide instant, accurate quotes for roofing projects.
+          initialMessage={`👋 Hello! I'm your AI carpet cleaning specialist. I can provide instant, accurate quotes for all carpet cleaning services.
 
 To get started, tell me about:
-• Type of roofing work needed (repair, replacement, new installation)
-• Your home's size and roof type
-• Any specific materials or concerns
+• How many rooms need cleaning
+• Any pet odors, stains, or specific concerns
+• Your carpet type or condition
+• When you need the service (same-day available!)
 
 Let's get you a quote in seconds!`}
         />

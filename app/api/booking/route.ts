@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Log the booking (in production, save to database)
-    console.log('New roofing consultation booking:', {
+    console.log('New carpet cleaning booking:', {
       timestamp: new Date().toISOString(),
       customer: {
         name: bookingData.fullName,
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     // Here you would typically:
     // 1. Save to database
     // 2. Send confirmation email to customer
-    // 3. Send notification to roofing team
+    // 3. Send notification to carpet cleaning team
     // 4. Integrate with CRM/scheduling system
     // 5. Send SMS confirmation
 
@@ -71,12 +71,12 @@ export async function POST(request: NextRequest) {
     await new Promise(resolve => setTimeout(resolve, 1000))
 
     // Send notification email to admin
-    await notifyRoofingTeam(bookingData)
+    await notifyCarpetCleaningTeam(bookingData)
 
     return NextResponse.json({
       success: true,
-      message: 'Consultation request submitted successfully',
-      bookingId: `RF-${Date.now()}`, // Generate proper booking ID in production
+      message: 'Booking request submitted successfully',
+      bookingId: `CC-${Date.now()}`,
       estimatedResponseTime: '24 hours'
     })
 
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function notifyRoofingTeam(bookingData: BookingData) {
+async function notifyCarpetCleaningTeam(bookingData: BookingData) {
   try {
     const mailjet = new Mailjet({
       apiKey: process.env.MAILJET_API_KEY || '',
@@ -103,18 +103,18 @@ async function notifyRoofingTeam(bookingData: BookingData) {
           {
             From: {
               Email: process.env.SENDER_EMAIL || 'noreply@example.com',
-              Name: 'Roofing Quote Bot'
+              Name: 'Carpet Cleaning Quote Bot'
             },
             To: [
               {
                 Email: process.env.ADMIN_EMAIL || 'admin@example.com',
-                Name: 'Roofing Team'
+                Name: 'Carpet Cleaning Team'
               }
             ],
-            Subject: `New Roofing Quote Request - ${bookingData.fullName}`,
+            Subject: `New Carpet Cleaning Booking - ${bookingData.fullName}`,
             HTMLPart: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #2563eb;">New Roofing Consultation Request</h2>
+                <h2 style="color: #2563eb;">New Carpet Cleaning Booking Request</h2>
                 
                 <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin: 20px 0;">
                   <h3 style="color: #374151; margin-top: 0;">Customer Information</h3>
@@ -125,8 +125,8 @@ async function notifyRoofingTeam(bookingData: BookingData) {
                 </div>
 
                 <div style="background-color: #f0f9ff; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                  <h3 style="color: #374151; margin-top: 0;">Project Details</h3>
-                  <p><strong>Project Type:</strong> ${bookingData.projectType}</p>
+                  <h3 style="color: #374151; margin-top: 0;">Service Details</h3>
+                  <p><strong>Service Type:</strong> ${bookingData.projectType}</p>
                   <p><strong>Preferred Date:</strong> ${bookingData.projectDate}</p>
                   ${bookingData.projectTime ? `<p><strong>Preferred Time:</strong> ${bookingData.projectTime}</p>` : ''}
                   <p><strong>Estimated Quote:</strong> $${bookingData.quote.toLocaleString()}</p>
@@ -148,7 +148,7 @@ async function notifyRoofingTeam(bookingData: BookingData) {
               </div>
             `,
             TextPart: `
-New Roofing Consultation Request
+New Carpet Cleaning Booking Request
 
 Customer Information:
 - Name: ${bookingData.fullName}
@@ -156,8 +156,8 @@ Customer Information:
 - Phone: ${bookingData.phone}
 - Location: ${bookingData.location}
 
-Project Details:
-- Project Type: ${bookingData.projectType}
+Service Details:
+- Service Type: ${bookingData.projectType}
 - Preferred Date: ${bookingData.projectDate}
 - Preferred Time: ${bookingData.projectTime || 'Not specified'}
 - Estimated Quote: $${bookingData.quote.toLocaleString()}

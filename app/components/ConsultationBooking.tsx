@@ -8,7 +8,7 @@ interface ConsultationBookingProps {
   onClose: () => void
   customerContext?: {
     location?: string
-    roofType?: string
+    serviceType?: string
     sqft?: number
     quote?: number
   }
@@ -55,7 +55,7 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
         projectDate: form.preferredDate,
         projectTime: form.preferredTime,
         location: form.address,
-        projectType: customerContext?.roofType || 'General Roofing',
+        projectType: customerContext?.serviceType || 'General Carpet Cleaning',
         additionalNotes: form.notes,
         quote: customerContext?.quote || 0,
         chatHistory: [] // You can pass actual chat history if available
@@ -116,7 +116,7 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Calendar className="w-6 h-6 text-white" />
-              <h2 className="text-xl font-semibold text-white">Book Consultation</h2>
+              <h2 className="text-xl font-semibold text-white">Book Carpet Cleaning Appointment</h2>
             </div>
             <button
               onClick={onClose}
@@ -132,15 +132,15 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
           {isSubmitted ? (
             <div className="text-center py-8">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Consultation Booked!</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Carpet Cleaning Appointment Booked!</h3>
               <p className="text-gray-600 mb-4">
                 We'll contact you within 24 hours to confirm your appointment.
               </p>
               <div className="bg-blue-50 rounded-lg p-4 text-sm text-blue-800">
                 <p><strong>What's next:</strong></p>
                 <p>• You'll receive a confirmation email</p>
-                <p>• Our specialist will call to confirm details</p>
-                <p>• Free on-site assessment and detailed quote</p>
+                <p>• Our carpet cleaning specialist will call to confirm details</p>
+                <p>• Free on-site assessment if needed</p>
               </div>
             </div>
           ) : (
@@ -150,8 +150,8 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
                 <div className="bg-gray-50 rounded-lg p-4 mb-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Project Summary</h3>
                   <div className="text-sm text-gray-600 space-y-1">
-                    {customerContext.roofType && (
-                      <p>• Roof Type: {customerContext.roofType.charAt(0).toUpperCase() + customerContext.roofType.slice(1)}</p>
+                    {customerContext.serviceType && (
+                      <p>• Service Type: {customerContext.serviceType.charAt(0).toUpperCase() + customerContext.serviceType.slice(1)}</p>
                     )}
                     {customerContext.sqft && (
                       <p>• Size: {customerContext.sqft.toLocaleString()} sqft</p>
@@ -289,11 +289,11 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
                   disabled={isSubmitting}
                   className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm"
                 >
-                  {isSubmitting ? 'Booking...' : 'Book Free Consultation'}
+                  {isSubmitting ? 'Booking...' : 'Book Carpet Cleaning Appointment'}
                 </button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  By submitting, you agree to be contacted about your roofing project.
+                  By submitting, you agree to be contacted about your carpet cleaning appointment.
                 </p>
               </form>
             </>
@@ -312,7 +312,7 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Calendar className="w-6 h-6 text-white" />
-              <h2 className="text-xl font-semibold text-white">Book Consultation</h2>
+              <h2 className="text-xl font-semibold text-white">Book Carpet Cleaning Appointment</h2>
             </div>
             <button
               onClick={onClose}
@@ -328,15 +328,15 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
           {isSubmitted ? (
             <div className="text-center py-8">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Consultation Booked!</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">Carpet Cleaning Appointment Booked!</h3>
               <p className="text-gray-600 mb-4">
                 We'll contact you within 24 hours to confirm your appointment.
               </p>
               <div className="bg-blue-50 rounded-lg p-4 text-sm text-blue-800">
                 <p><strong>What's next:</strong></p>
                 <p>• You'll receive a confirmation email</p>
-                <p>• Our specialist will call to confirm details</p>
-                <p>• Free on-site assessment and detailed quote</p>
+                <p>• Our carpet cleaning specialist will call to confirm details</p>
+                <p>• Free on-site assessment if needed</p>
               </div>
             </div>
           ) : (
@@ -346,8 +346,8 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
                 <div className="bg-gray-50 rounded-lg p-4 mb-6">
                   <h3 className="font-semibold text-gray-900 mb-2">Project Summary</h3>
                   <div className="text-sm text-gray-600 space-y-1">
-                    {customerContext.roofType && (
-                      <p>• Roof Type: {customerContext.roofType.charAt(0).toUpperCase() + customerContext.roofType.slice(1)}</p>
+                    {customerContext.serviceType && (
+                      <p>• Service Type: {customerContext.serviceType.charAt(0).toUpperCase() + customerContext.serviceType.slice(1)}</p>
                     )}
                     {customerContext.sqft && (
                       <p>• Size: {customerContext.sqft.toLocaleString()} sqft</p>
@@ -485,11 +485,11 @@ export default function ConsultationBooking({ isOpen, onClose, customerContext, 
                   disabled={isSubmitting}
                   className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 shadow-sm"
                 >
-                  {isSubmitting ? 'Booking...' : 'Book Free Consultation'}
+                  {isSubmitting ? 'Booking...' : 'Book Carpet Cleaning Appointment'}
                 </button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  By submitting, you agree to be contacted about your roofing project.
+                  By submitting, you agree to be contacted about your carpet cleaning appointment.
                 </p>
               </form>
             </>

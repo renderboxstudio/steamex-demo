@@ -14,8 +14,9 @@ interface Message {
 interface ConversationContext {
   location?: string
   serviceArea?: boolean
-  roofType?: string
-  sqft?: number
+  serviceType?: string
+  complexity?: 'basic' | 'standard' | 'complex'
+  urgency?: 'emergency' | 'urgent' | 'standard'
   timeline?: string
   budget?: string
   previousQuotes?: number[]
@@ -28,12 +29,12 @@ interface ChatBotProps {
   className?: string
 }
 
-const STORAGE_KEY = 'roofing-chat-data'
+const STORAGE_KEY = 'carpet-chat-data'
 
 export default function ChatBot({
   onSendMessage,
-  initialMessage = "Hello! I'm your AI roofing assistant. I can help you get an instant quote for your roofing project. Tell me about your roof - what type of work do you need, the size of your home, and any specific concerns you have!",
-  placeholder = "Describe your roofing project for an instant quote...",
+  initialMessage = "Hello! I'm your AI carpet cleaning assistant. I can help you get an instant quote for your carpet cleaning. Tell me about your needs - whether it's steam cleaning, stain removal, pet treatment, or upholstery cleaning - and I'll provide you with an accurate estimate!",
+  placeholder = "Describe your carpet cleaning needs for an instant quote...",
   className = ""
 }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([])
@@ -200,7 +201,7 @@ export default function ChatBot({
               <Bot className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h3 className="font-semibold text-white">AI Roofing Assistant</h3>
+              <h3 className="font-semibold text-white">AI Carpet Cleaning Assistant</h3>
               <p className="text-blue-100 text-sm">Online • Ready to help</p>
             </div>
           </div>
@@ -290,7 +291,7 @@ export default function ChatBot({
                 </div>
                 <div className="flex items-center gap-2">
                   <Loader2 className="w-4 h-4 animate-spin text-blue-600" />
-                  <span className="text-sm font-medium text-gray-600">Analyzing your request...</span>
+                  <span className="text-sm font-medium text-gray-600">Calculating your quote...</span>
                 </div>
               </div>
             </div>
@@ -341,8 +342,9 @@ export default function ChatBot({
             onClose={() => setShowBooking(false)}
             customerContext={{
               location: context.location,
-              roofType: context.roofType,
-              sqft: context.sqft,
+              serviceType: context.serviceType,
+              complexity: context.complexity,
+              urgency: context.urgency,
               quote: context.previousQuotes?.[context.previousQuotes.length - 1]
             }}
             standalone={true}
