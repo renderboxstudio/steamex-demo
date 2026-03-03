@@ -9,6 +9,8 @@ interface ConsultationBookingProps {
   customerContext?: {
     location?: string
     serviceType?: string
+    complexity?: string
+    urgency?: string
     sqft?: number
     quote?: number
   }
